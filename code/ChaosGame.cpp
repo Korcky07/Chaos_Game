@@ -18,6 +18,7 @@ int main()
 
     vector<Vector2f> vertices;
     vector<Vector2f> points;
+    vector<Color> colors;
 
     sf::Font font;
         if (!font.loadFromFile("ComicSans.ttf"))
@@ -35,6 +36,22 @@ int main()
         
         text.setCharacterSize(24);
         text.setFillColor(sf::Color::Blue);
+
+        sf::Text count;
+
+        count.setFont(font);
+
+        count.setString("0");
+        count.setPosition(1800, 980);
+
+        count.setCharacterSize(50);
+        count.setFillColor(sf::Color::Cyan);
+
+
+        colors.push_back(sf::Color::Cyan);
+        colors.push_back(sf::Color::Yellow);
+        colors.push_back(sf::Color::Magenta);
+
 	while (window.isOpen())
 	{
         /*
@@ -98,8 +115,13 @@ int main()
         {
             ///generate more point(s)
             ///select random vertex
+            int vertex = rand() % 3;
             ///calculate midpoint between random vertex and the last point in the vector
+            sf::Vector2f point;
+            point.x = (vertices[vertex].x + points.back().x) / 2;
+            point.y = (vertices[vertex].y + points.back().y) / 2;
             ///push back the newly generated coord.
+            points.push_back(point);
         }
 
         /*
@@ -109,19 +131,27 @@ int main()
 		*/
         window.clear();
         window.draw(text);
+        count.setString(to_string(points.size()));
+        window.draw(count);
         for(int i = 0; i < vertices.size(); i++)
         {
             RectangleShape rect(Vector2f(10,10));
             rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
-            rect.setFillColor(Color::Blue);
+            rect.setFillColor(Color::White);
             window.draw(rect);
         }
+        int colorIndex = 0;
         for (int i = 0; i < points.size(); i++)
         {
             CircleShape point(5);
             point.setPosition(Vector2f(points[i].x, points[i].y));
-            point.setFillColor(Color::Cyan);
+            point.setFillColor(colors.at(colorIndex));
             window.draw(point);
+            colorIndex++;
+            if (colorIndex == colors.size())
+            {
+                colorIndex = 0;
+            }
         }
         window.display();
     }
