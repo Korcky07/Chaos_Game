@@ -31,10 +31,10 @@ int main()
 
         text.setFont(font);
 
-        text.setString("Hell0! Welcome to the Chaos Game! Press Enter to start! /n");
+        text.setString("Hello! Welcome to the Chaos Game! Press Enter to start!");
         
         text.setCharacterSize(24);
-        text.setFillColor(sf::Color::Blue);
+        text.setFillColor(sf::Color::Cyan);
 
 	while (window.isOpen())
 	{
@@ -60,7 +60,7 @@ int main()
 				// Quit the game when the window is closed
 				window.close();
             }
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (event.type == sf::Event::MouseButtonPressed && nextMessage == true)
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
@@ -109,12 +109,13 @@ int main()
 		****************************************
 		*/
         window.clear();
+        window.draw(text);
         for(int i = 0; i < vertices.size(); i++)
         {
-            window.draw(text);
+            
             RectangleShape rect(Vector2f(10,10));
             rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
-            rect.setFillColor(Color::Blue);
+            rect.setFillColor(Color::Cyan);
             window.draw(rect);
         }
         window.display();
