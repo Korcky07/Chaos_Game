@@ -32,10 +32,12 @@ int main()
 
         text.setFont(font);
 
+        text.setPosition(529, 127);
+
         text.setString("Hello! Welcome to the Chaos Game! Press Enter to start!");
         
-        text.setCharacterSize(24);
-        text.setFillColor(sf::Color::Cyan);
+        text.setCharacterSize(35);
+        text.setFillColor(sf::Color::White);
 
         sf::Text count;
 
@@ -45,7 +47,7 @@ int main()
         count.setPosition(1800, 980);
 
         count.setCharacterSize(50);
-        count.setFillColor(sf::Color::Cyan);
+        count.setFillColor(sf::Color::White);
 
 
         colors.push_back(sf::Color::Cyan);
@@ -111,7 +113,7 @@ int main()
 		****************************************
 		*/
 
-        if(points.size() > 0)
+        if (points.size() > 0)
         {
             ///generate more point(s)
             ///select random vertex
@@ -123,8 +125,6 @@ int main()
             ///push back the newly generated coord.
             points.push_back(point);
         }
-
-        for (int i = 0; )
         /*
 		****************************************
 		Draw
