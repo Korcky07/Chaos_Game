@@ -35,7 +35,6 @@ int main()
         
         text.setCharacterSize(24);
         text.setFillColor(sf::Color::Blue);
-
 	while (window.isOpen())
 	{
         /*
@@ -60,7 +59,7 @@ int main()
 				// Quit the game when the window is closed
 				window.close();
             }
-            if (event.type == sf::Event::MouseButtonPressed)
+            if (event.type == sf::Event::MouseButtonPressed && nextMessage)
             {
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
@@ -75,7 +74,7 @@ int main()
                     else if(points.size() == 0)
                     {
                         ///fourth click
-                        ///push back to points vector
+                        points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
                     }
                 }
             }
@@ -109,13 +108,20 @@ int main()
 		****************************************
 		*/
         window.clear();
+        window.draw(text);
         for(int i = 0; i < vertices.size(); i++)
         {
-            window.draw(text);
             RectangleShape rect(Vector2f(10,10));
             rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
             rect.setFillColor(Color::Blue);
             window.draw(rect);
+        }
+        for (int i = 0; i < points.size(); i++)
+        {
+            CircleShape point(5);
+            point.setPosition(Vector2f(points[i].x, points[i].y));
+            point.setFillColor(Color::Cyan);
+            window.draw(point);
         }
         window.display();
     }
