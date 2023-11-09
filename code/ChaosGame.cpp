@@ -46,7 +46,7 @@ int main()
 
         if (nextMessage == true)
         {
-            text.setString("Please pick a point from within the triangle.");
+            text.setString("Please pick 3 spots to make a triangle");
         }
         
       
@@ -103,6 +103,7 @@ int main()
             ///push back the newly generated coord.
         }
 
+        for (int i = 0; )
         /*
 		****************************************
 		Draw
