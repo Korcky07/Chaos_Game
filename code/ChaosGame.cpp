@@ -14,10 +14,27 @@ int main()
     // Create a video mode object
 	VideoMode vm(1920, 1080);
 	// Create and open a window for the game
-	RenderWindow window(vm, "Timber Game!!", Style::Default);
+	RenderWindow window(vm, "Chaos Game!!", Style::Default);
 
     vector<Vector2f> vertices;
     vector<Vector2f> points;
+
+    sf::Font font;
+        if (!font.loadFromFile("ComicSans.ttf"))
+        {
+            throw runtime_error("Could not open file");
+        }
+
+        sf::Text text;
+
+        bool nextMessage = false;
+
+        text.setFont(font);
+
+        text.setString("Hell0! Welcome to the Chaos Game! Press Enter to start! /n");
+        
+        text.setCharacterSize(24);
+        text.setFillColor(sf::Color::Blue);
 
 	while (window.isOpen())
 	{
@@ -26,6 +43,15 @@ int main()
 		Handle the players input
 		****************************************
 		*/
+
+        if (nextMessage == true)
+        {
+            text.setString("Please pick a point from within the triangle.");
+        }
+        
+      
+
+
         Event event;
 		while (window.pollEvent(event))
 		{
@@ -58,6 +84,11 @@ int main()
 		{
 			window.close();
 		}
+
+        if (Keyboard::isKeyPressed(Keyboard::Enter))
+        {
+            nextMessage = true; 
+        }
         /*
 		****************************************
 		Update
@@ -80,6 +111,7 @@ int main()
         window.clear();
         for(int i = 0; i < vertices.size(); i++)
         {
+            window.draw(text);
             RectangleShape rect(Vector2f(10,10));
             rect.setPosition(Vector2f(vertices[i].x, vertices[i].y));
             rect.setFillColor(Color::Blue);
