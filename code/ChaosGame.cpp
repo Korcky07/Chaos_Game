@@ -43,8 +43,8 @@ int main()
 
         count.setFont(font);
 
-        count.setString("0");
-        count.setPosition(1800, 980);
+        count.setString("Points: 0");
+        count.setPosition(50, 980);
 
         count.setCharacterSize(50);
         count.setFillColor(sf::Color::White);
@@ -62,9 +62,13 @@ int main()
 		****************************************
 		*/
 
-        if (nextMessage == true)
+        if (nextMessage == true && vertices.size() < 3)
         {
             text.setString("Please pick 3 spots to make a triangle");
+        }
+        else if(nextMessage && points.size() == 0)
+        {
+            text.setString("Click one more point to begin!");
         }
         
       
@@ -93,6 +97,7 @@ int main()
                     else if(points.size() == 0)
                     {
                         ///fourth click
+                        text.setString(" ");
                         points.push_back(Vector2f(event.mouseButton.x, event.mouseButton.y));
                     }
                 }
@@ -132,7 +137,7 @@ int main()
 		*/
         window.clear();
         window.draw(text);
-        count.setString(to_string(points.size()));
+        count.setString("Points: " + to_string(points.size()));
         window.draw(count);
         for(int i = 0; i < vertices.size(); i++)
         {
